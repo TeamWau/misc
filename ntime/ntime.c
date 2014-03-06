@@ -48,6 +48,5 @@ int main( int argc, char **argv ) {
     }
 
         measuretime_coarse( argv[1], argv + 1 );
-//        printf( "\nTotal approx. runtime: %dns\n", timeret ) ;
         return 0;
 }
