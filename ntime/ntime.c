@@ -2,38 +2,40 @@
 #include <time.h>
 #include <unistd.h>
 #include <sys/types.h>
+#include <stdint.h>
 
-long measuretime_coarse( char** program, char** program_args ) {
-    struct timespec res;
-    int ctime, rs;
-    long starttime, endtime;
+int64_t getTimeDiff(struct timespec *time_A, struct timespec *time_B){
+    return ((time_A->tv_sec * 1000000000) + time_A->tv_nsec) -
+           ((time_B->tv_sec * 1000000000) + time_B->tv_nsec);
+}
+
+int measuretime_coarse( char* program, char** program_args ) {
+    struct timespec start, end;
     pid_t pID;
+    int rs;
 
     if( program_args == NULL ) {
-        program_args = " ";
+        program_args[0] = " ";
     }
 
-    ctime = clock_getres( CLOCK_MONOTONIC_COARSE, &res );
-    ctime = clock_gettime( CLOCK_MONOTONIC_COARSE, &res );
-    starttime = res.tv_nsec;
-    printf( "Begin execution at approx: %ldns\n", starttime );
+    clock_gettime(CLOCK_MONOTONIC, &start);
 
     pID = fork();
-
     if( pID == 0 ) {
         execvp( program, program_args );
-    } 
+    }
     else if( pID < 0 ) {
-        return 1;   
-    } 
+        return 1;
+    }
     else {
         waitpid( pID, &rs, 0 );
-        ctime = clock_gettime( CLOCK_MONOTONIC_COARSE, &res );
-        endtime = res.tv_nsec;
 
-        printf( "End execution at approx: %ldns\n", endtime );
-        
-        return endtime - starttime;
+        clock_gettime(CLOCK_MONOTONIC, &end);
+
+        uint64_t tdiff = getTimeDiff(&end, &start);
+
+        printf("\nApprox wall time: %llu ns\n", tdiff);
+        return 0;
     }
 }
 
@@ -45,7 +47,7 @@ int main( int argc, char **argv ) {
         return 1;
     }
 
-        long timeret = measuretime_coarse( argv[1], argv + 1 );
-        printf( "\nTotal approx. runtime: %dns\n", timeret ) ;
+        measuretime_coarse( argv[1], argv + 1 );
+//        printf( "\nTotal approx. runtime: %dns\n", timeret ) ;
         return 0;
 }
