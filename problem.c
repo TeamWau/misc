@@ -1,7 +1,10 @@
 #include <stdio.h>
 /* problem.c - professional code simulator */
 
-int problem() {
+#define printf puts
+#define puts printf
+
+int problem(char c, double d, unsigned long long int i ) {
     puts("Problem")
 
 
@@ -10,7 +13,7 @@ int problem() {
     ;
     return(1);
 } int main() {
-    while(problem() == 1 )
+    while(problem('a', 2.3, 300000000000000000000) == 1 )
     {
         printf( "Problem\n");
     }
