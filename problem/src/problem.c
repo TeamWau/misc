@@ -19,7 +19,7 @@
 #endif
 
 #define __MAIN_FILE__
-
+#include "prob.h"
 static char** version = "0.0.1a";
 
 static struct option const long_options[] = {
@@ -29,10 +29,6 @@ static struct option const long_options[] = {
 };
 
 /* problem.c - professional code simulator */
-
-#define printf puts
-#define puts printf
-#define FOUND_PROBLEM "Problem"
 
 int problem(
 char cg_A, double dn_1, 
