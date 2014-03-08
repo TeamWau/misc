@@ -31,14 +31,14 @@ static struct option const long_options[] = {
 /* problem.c - professional code simulator */
 
 int problem(
-char cg_A, double dn_1, 
-unsigned long long int l_i_1 )
+char cg_A, double num_dn_1, 
+unsigned long long int l_L_i_1 )
 {
-   
-    puts(FOUND_PROBLEM)
-    ;
-    return(1)
-     ;
+   if(cg_A == NULL){perror(FOUND_PROBLEM); return(1);
+   } else {
+        puts(FOUND_PROBLEM);
+        return 1;
+}
 }
 
 
