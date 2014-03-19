@@ -20,7 +20,7 @@
 
 #define __MAIN_FILE__
 #include "prob.h"
-static char** version = "0.0.1a";
+static char** version = "0.0.1a alpha beta gamma sigma delta.3-branched-fork-clone-merged";
 
 static struct option const long_options[] = {
 {"version", no_argument, NULL, 'v'},{ "license", no_argument, NULL, 'l' },
@@ -28,16 +28,17 @@ static struct option const long_options[] = {
     { "help", no_argument, NULL, 'q' },
 };
 
-/* problem.c - professional code simulator */
+/* problem.c - Professional Code Error Handling Simulator */
 
-int problem(
+unsigned long long int problem(
 char cg_A, double num_dn_1, 
-unsigned long long int l_L_i_1 )
+unsigned long long int l_L_0O_i_1 )
 {
-   if(cg_A == NULL){perror(FOUND_PROBLEM); return(1);
+   if(cg_A == NULL){           perror(FOUND_PROBLEM); return(1);
    } else {
-        puts(FOUND_PROBLEM);
-        return 1;
+        puts(FOUND_PROBLEM)
+        ;
+        return (1 );
 }
 }
 
