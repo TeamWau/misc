@@ -5,6 +5,7 @@
 #include <stdint.h>
 #include <getopt.h>
 
+#define VERSION_NUMBER "0.9.9"
 char colour;
 
 uint64_t getTimeDiff( struct timespec *time_A, struct timespec *time_B ) {
@@ -50,17 +51,26 @@ int measureTime( char* program, char** program_args ) {
 
 int main( int argc, char **argv ) {
     if( argc == 1 ) {
-        printf( "%s - precise time program\nInvocation: %s [-n] <program> <args for program>\n", argv[0], argv[0] );
-        printf( "Arguments for %s: \n'-n': disable coloured output.\n", argv[0] ); 
+        printf( "%s - precise time program\nInvocation: %s [-nv] <program> <args for program>\n", argv[0], argv[0] );
+
+        printf( "Arguments for %s: \n'-n': disable coloured output.\n'-v': print version and exit.\n", argv[0] ); 
+
         printf( "\nNOTICE: Times are \033[1mapproximate\033[0m! As this is a very accurate timer, it measures the overhead time of its own execution, as well as any work done by the kernel.\nWhat this means is that the times are likely to vary heavily and should probably be averaged versus used as-is as a benchmark.\n" );
-    printf( "\nError: no program specified, terminating.\n" );
+
+        printf( "\nError: no program specified, terminating.\n" );
+
         return 1;
+
     }
         int opt, flags;
-        opt = getopt( argc, argv, "n" );
+        opt = getopt( argc, argv, "nv" );
         switch( opt ){
             case 'n':
                 flags = 1;
+                break;
+            case 'v':
+                printf( "%s - version %s\n", argv[0], VERSION_NUMBER );
+                return 0;
                 break;
             default:
                 flags = 0;
