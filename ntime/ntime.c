@@ -1,3 +1,11 @@
+/* Copyright 2014, TeamWau Software.
+ * Licensed under the two-clause BSD license.
+ *
+ * TODO: (in order of importance)
+ * 1. Have a clear separation of ntime's args and the given program's args ( currently, if you call a program with an arg, ntime will spit an error message that that arg isn't valid, and will run the program with that arg. This could be an issue if you pass the -v or -n arg to the program, as ntime will try to read those as its own args
+ * 2. Comment code.
+ * 3 Squash compiler warnings (about printing uint64_t's with the format string %llu)
+ */
 #include <stdio.h>
 #include <time.h>
 #include <unistd.h>
